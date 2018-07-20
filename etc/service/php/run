@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /var/www/html
+
+exec php-fpm -F 2>&1
