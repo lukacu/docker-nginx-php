@@ -9,4 +9,10 @@ fi
 # Initialization hook.
 [ -f /etc/service/nginx/run.initialization ] && source /etc/service/nginx/run.initialization
 
-exec /usr/sbin/nginx 2>&1
+cd /var/www/html
+
+if [ -n "$NGINX_RUN_ATTACHED" ]; then
+    exec /usr/sbin/nginx -g 'pid /tmp/nginx.pid; daemon off;' 2>&1
+else
+    exec /usr/sbin/nginx 2>&1
+fi
